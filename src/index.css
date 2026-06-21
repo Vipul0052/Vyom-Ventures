@@ -1992,3 +1992,35 @@ a.info-value:hover {
     text-align: center;
   }
 }
+
+/* Floating WhatsApp Button */
+.whatsapp-float-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  background-color: #25D366;
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 9998;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+}
+
+.whatsapp-float-btn:hover {
+  transform: scale(1.08);
+  background-color: #20ba59;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float-btn {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+  }
+}
