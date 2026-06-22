@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Magnetic from './Magnetic';
 
-export default function Navbar() {
+export default function Navbar({ isLoading }: { isLoading?: boolean }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const menuOverlayRef = useRef<HTMLDivElement>(null);
@@ -65,7 +65,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`navbar-main ${isScrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''}`}>
+      <nav className={`navbar-main ${isScrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''} ${isLoading ? 'navbar-hidden' : ''}`}>
         <div className="navbar-container">
           {/* Logo */}
           <a href="#" className="nav-logo" onClick={(e) => handleLinkClick(e, 'hero')}>

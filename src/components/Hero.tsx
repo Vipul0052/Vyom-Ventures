@@ -2,7 +2,11 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Magnetic from './Magnetic';
 
-export default function Hero() {
+interface HeroProps {
+  onLoadingComplete?: () => void;
+}
+
+export default function Hero({ onLoadingComplete }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const loadingLineRef = useRef<HTMLDivElement>(null);
@@ -37,6 +41,9 @@ export default function Hero() {
         ease: 'power2.out',
         onComplete: () => {
           gsap.set(overlayRef.current, { display: 'none' });
+          if (onLoadingComplete) {
+            onLoadingComplete();
+          }
         }
       }, '+=0.1');
 

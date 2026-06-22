@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CustomCursor from './components/CustomCursor';
 import ParticleBackground from './components/ParticleBackground';
 import Navbar from './components/Navbar';
@@ -13,6 +13,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -36,16 +37,16 @@ function App() {
       <div className="scroll-progress-bar" />
 
       {/* Luxury GSAP custom cursor */}
-      <CustomCursor />
+      <CustomCursor isLoading={isLoading} />
 
       {/* Background ambient drifting gold particle canvas */}
       <ParticleBackground />
 
       {/* Header Navigation with backdrop blur */}
-      <Navbar />
+      <Navbar isLoading={isLoading} />
 
       {/* Cinematic Hero Entrance Section */}
-      <Hero />
+      <Hero onLoadingComplete={() => setIsLoading(false)} />
 
       {/* Infinite scrolling industry vertical marquee ticker */}
       <MarqueeTicker />
@@ -74,7 +75,7 @@ function App() {
       {/* Floating WhatsApp CTA */}
       <a 
         href="https://wa.me/919999999999?text=Hi%20Vyom%20Ventures,%20I'd%20like%20to%20inquire%20about%20your%20services." 
-        className="whatsapp-float-btn" 
+        className={`whatsapp-float-btn ${isLoading ? 'whatsapp-hidden' : ''}`} 
         target="_blank" 
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"

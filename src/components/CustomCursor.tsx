@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
-export default function CustomCursor() {
+export default function CustomCursor({ isLoading }: { isLoading?: boolean }) {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
+    if (isLoading) return;
     // Disable on devices that do not support hover/pointer interactions (mobile/tablet touch-only)
     const hasHover = window.matchMedia('(hover: hover)').matches;
     if (!hasHover) return;
@@ -78,7 +79,7 @@ export default function CustomCursor() {
       window.removeEventListener('mouseover', onMouseOver);
       window.removeEventListener('mouseout', onMouseOut);
     };
-  }, []); // Empty dependencies ensures this setup runs exactly once
+  }, [isLoading]); // Re-run when loading state changes
 
   return (
     <div
