@@ -1530,7 +1530,8 @@ h1, h2, h3, h4, h5, h6 {
   padding: 2.5rem 4rem;
   transition: border-color 0.4s ease;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .industry-bg-wash {
@@ -1614,18 +1615,92 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
-@media (max-width: 900px) {
+/* Floating Image Preview (Desktop Cursor-Follower) */
+.industry-image-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 200px;
+  pointer-events: none;
+  z-index: 9999; /* Float above page but below luxury custom cursor */
+  border-radius: 4px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  border: 1px solid rgba(200, 169, 110, 0.25);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.industry-image-preview.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.preview-slides-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-slide {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Mobile Accordion Style Image Wrapper */
+.industry-mobile-image-wrapper {
+  display: none;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-top: 0;
+  transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin-top 0.4s ease, border-color 0.4s ease;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.industry-mobile-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .industry-mobile-image-wrapper {
+    display: block;
+  }
+  
   .industry-item {
     padding: 2rem 2rem;
   }
+  
   .industry-left-group {
     gap: 1.5rem;
   }
+  
   .industry-item:hover .industry-name {
     transform: translateX(10px);
   }
+  
   .industries-section {
     padding: 6rem 0;
+  }
+
+  /* Reveal image accordion on touch hover/active states */
+  .industry-item:hover .industry-mobile-image-wrapper,
+  .industry-item:focus .industry-mobile-image-wrapper,
+  .industry-item:focus-within .industry-mobile-image-wrapper {
+    height: 180px;
+    margin-top: 1.25rem;
+    border-color: rgba(200, 169, 110, 0.25);
+  }
+  
+  /* Hide cursor follower completely on non-desktop viewports */
+  .industry-image-preview {
+    display: none !important;
   }
 }
 
@@ -1641,6 +1716,16 @@ h1, h2, h3, h4, h5, h6 {
   }
   .industry-arrow-box {
     display: none; /* Hide arrows on small mobile devices to save space */
+  }
+  
+  .industry-item:hover .industry-mobile-image-wrapper,
+  .industry-item:focus .industry-mobile-image-wrapper,
+  .industry-item:focus-within .industry-mobile-image-wrapper {
+    height: 140px;
+  }
+  
+  .industry-mobile-image {
+    height: 140px;
   }
 }
 
