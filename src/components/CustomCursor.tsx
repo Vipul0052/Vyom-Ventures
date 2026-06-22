@@ -6,9 +6,9 @@ export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    // Disable on mobile/tablet devices
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) return;
+    // Disable on devices that do not support hover/pointer interactions (mobile/tablet touch-only)
+    const hasHover = window.matchMedia('(hover: hover)').matches;
+    if (!hasHover) return;
 
     const cursor = cursorRef.current;
     if (!cursor) return;

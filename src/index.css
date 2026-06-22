@@ -1970,10 +1970,17 @@ a.info-value:hover {
   color: var(--color-gold);
 }
 
+.footer-left-group {
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
+}
+
 .footer-copyright {
   font-size: 0.75rem;
   color: var(--color-muted);
   letter-spacing: 0.05em;
+  margin-right: 6rem; /* Prevent overlap with floating WhatsApp button */
 }
 
 .footer-location {
@@ -1991,6 +1998,14 @@ a.info-value:hover {
     gap: 1.5rem;
     text-align: center;
   }
+  .footer-left-group {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  .footer-copyright {
+    margin-right: 0;
+  }
 }
 
 /* Floating WhatsApp Button */
@@ -1998,29 +2013,31 @@ a.info-value:hover {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  width: 56px;
-  height: 56px;
-  background-color: #25D366;
-  color: #FFFFFF;
+  width: 46px;
+  height: 46px;
+  background-color: var(--bg-surface);
+  color: var(--color-gold);
+  border: 1px solid rgba(200, 169, 110, 0.35);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   z-index: 9998;
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .whatsapp-float-btn:hover {
   transform: scale(1.08);
-  background-color: #20ba59;
+  background-color: var(--bg-hover);
+  border-color: var(--color-gold);
 }
 
 @media (max-width: 768px) {
   .whatsapp-float-btn {
     bottom: 1.5rem;
     right: 1.5rem;
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
   }
 }
