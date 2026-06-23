@@ -20,33 +20,39 @@ export default function Process() {
   const steps: ProcessStep[] = [
     {
       num: '01',
-      title: 'Discovery & Analytics',
-      desc: 'We perform a complete operational diagnostic of your current setup or financial plans.',
-      points: ['Demographic profiling', 'Prime cost vetting', 'Menu margin auditing'],
+      title: 'Consultation & Planning',
+      desc: 'Initial client consultation, requirement mapping, and project scheduling.',
+      points: ['Location Vetting', 'Budget Scoping', 'Competitor Vetting'],
     },
     {
       num: '02',
-      title: 'Spatial Concept Engineering',
-      desc: 'Our architects construct the sensory dining layouts and high-throughput kitchen blueprints.',
-      points: ['Kitchen flow routing', 'Interior mood-boards', 'CAD equipment schedules'],
+      title: 'Business Strategy Development',
+      desc: 'Formulating operational pipelines, menu concepts, and granular financial modeling.',
+      points: ['Menu Planning', 'Financial Projections', 'Brand Strategy'],
     },
     {
       num: '03',
-      title: 'PMC & Project Delivery',
-      desc: 'We coordinate procurement timelines, manage local licensing, and oversee construction quality.',
-      points: ['General contractor vetting', 'Timeline scheduling', 'Site audits & safety check'],
+      title: 'Project Setup & Execution',
+      desc: 'Turnkey restaurant engineering, layout planning, and contractor coordination.',
+      points: ['Kitchen Layout CAD', 'PMC Management', 'Equipment Vetting'],
     },
     {
       num: '04',
-      title: 'Staffing & Operational Setup',
-      desc: 'Vetting head chefs, training floor staff, standardizing recipes, and establishing POS systems.',
-      points: ['Standard Operating Procedures', 'Recruitment templates', 'Recipe scaling audits'],
+      title: 'Team Training & SOP Implementation',
+      desc: 'Establishing standard operating protocols and onboarding kitchen/service teams.',
+      points: ['SOP Handbooks', 'Recruitment Vetting', 'Recipe Scalability'],
     },
     {
       num: '05',
-      title: 'Launch & Operational Handover',
-      desc: 'Executing opening week checklists and setting up dashboard performance loops for continuous growth.',
-      points: ['Influencer campaign coordination', 'Opening dry-runs', 'OpEx dashboard integration'],
+      title: 'Launch & Operational Support',
+      desc: 'Opening week checklists, POS aggregation, and active on-site handover support.',
+      points: ['Opening Week Vetting', 'POS/Aggregator Setup', 'Dry-Run Vetting'],
+    },
+    {
+      num: '06',
+      title: 'Business Growth & Improvement',
+      desc: 'Continuous performance audits, Zomato/Swiggy marketing, and business scaling.',
+      points: ['OpEx Auditing', 'Menu Optimization', 'Marketing Auditing'],
     },
   ];
 
@@ -143,7 +149,7 @@ export default function Process() {
           <div className="process-header-container">
             <span className="font-mono-accent">03 // The Methodology</span>
             <div className="process-indicator">
-              <span className="indicator-label">Progress Loop // Step 0{Math.min(5, Math.max(1, Math.round(progress * 4) + 1))} of 05</span>
+              <span className="indicator-label">Progress Loop // Step 0{Math.min(6, Math.max(1, Math.round(progress * 5) + 1))} of 06</span>
               <div className="indicator-bar">
                 <div 
                   className="indicator-fill" 
@@ -163,10 +169,10 @@ export default function Process() {
             {/* Introductory title card */}
             <div className="process-intro-card">
               <h2 className="process-section-title">
-                Our Five-Phase <span className="display-serif-italic">Delivery</span> Path
+                Our Six-Phase <span className="display-serif-italic">Delivery</span> Path
               </h2>
               <p className="process-section-desc">
-                From initial diagnostic audits to spatial handover and marketing launches, we manage the complete lifecycle.
+                From initial planning and strategies to spatial handover and operational scaling, we manage the complete lifecycle.
               </p>
               <div className="mobile-swipe-hint">
                 <span>Swipe horizontally</span>

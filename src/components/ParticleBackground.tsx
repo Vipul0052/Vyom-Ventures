@@ -100,7 +100,7 @@ export default function ParticleBackground() {
       zIndex: 0,
       pointerEvents: 'none',
       overflow: 'hidden',
-      background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+      background: 'linear-gradient(135deg, #0A0F1C 0%, #070a14 100%)',
     }}>
       {/* Drifting ambient blurs (blobs) */}
       <div 
@@ -113,7 +113,7 @@ export default function ParticleBackground() {
           maxHeight: '600px',
           maxWidth: '600px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(253, 230, 138, 0.35) 0%, rgba(253, 230, 138, 0) 70%)',
+          background: 'radial-gradient(circle, rgba(200, 169, 110, 0.04) 0%, rgba(200, 169, 110, 0) 70%)',
           filter: 'blur(90px)',
           animation: 'drift1 24s ease-in-out infinite alternate',
         }}
@@ -128,7 +128,7 @@ export default function ParticleBackground() {
           maxHeight: '650px',
           maxWidth: '650px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(186, 230, 253, 0.4) 0%, rgba(186, 230, 253, 0) 70%)',
+          background: 'radial-gradient(circle, rgba(30, 45, 66, 0.12) 0%, rgba(30, 45, 66, 0) 70%)',
           filter: 'blur(100px)',
           animation: 'drift2 28s ease-in-out infinite alternate',
         }}
@@ -143,7 +143,7 @@ export default function ParticleBackground() {
           maxHeight: '500px',
           maxWidth: '500px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(251, 207, 232, 0.3) 0%, rgba(251, 207, 232, 0) 70%)',
+          background: 'radial-gradient(circle, rgba(200, 169, 110, 0.03) 0%, rgba(200, 169, 110, 0) 70%)',
           filter: 'blur(80px)',
           animation: 'drift3 20s ease-in-out infinite alternate',
         }}

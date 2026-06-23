@@ -49,8 +49,12 @@ export default function Contact() {
                 <a href="mailto:info@vyomventures.com" className="info-value">info@vyomventures.com</a>
               </div>
               <div className="info-item">
-                <span className="info-label">Office Address</span>
-                <span className="info-value">DLF CyberCity, Phase 3, Gurugram, HR</span>
+                <span className="info-label">Call Support</span>
+                <a href="tel:+91XXXXXXXXXX" className="info-value">+91 XXXXXXXXXX</a>
+              </div>
+              <div className="info-item">
+                <span className="info-label">Office Location</span>
+                <span className="info-value">Gurugram, Haryana, India</span>
               </div>
             </div>
           </div>

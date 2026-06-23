@@ -5,32 +5,32 @@ export default function Industries() {
   const industries = [
     { 
       num: '01', 
-      name: 'Premium Restaurants',
+      name: 'Restaurants',
       image: '/prem restaurent.png'
     },
     { 
       num: '02', 
-      name: 'Bespoke Cafes & Bakeries',
+      name: 'Cafes',
       image: '/cafes and bakeries.png'
     },
     { 
       num: '03', 
-      name: 'Multi-Brand Cloud Kitchens',
+      name: 'Cloud Kitchens',
       image: '/cloud kitchen.png'
     },
     { 
       num: '04', 
-      name: 'Modern Gaming & Tech Arenas',
+      name: 'Gaming Zones',
       image: '/gaming zone.png'
     },
     { 
       num: '05', 
-      name: 'Luxury Hospitality & Resorts',
+      name: 'Hospitality Businesses',
       image: '/resort.png'
     },
     { 
       num: '06', 
-      name: 'Corporate Food Courts',
+      name: 'Food Courts',
       image: '/food court.png'
     },
   ];

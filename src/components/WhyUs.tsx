@@ -7,24 +7,28 @@ export default function WhyUs() {
 
   const points = [
     {
-      title: 'End-to-End Ownership',
-      desc: 'We navigate concept creation, licensing, space planning, contractor PMC, and team training under one roof.',
+      title: 'Professional Planning',
+      desc: 'We structure detail-oriented project roadmaps, financial modeling, and OpEx planning to de-risk your deployment.',
     },
     {
-      title: 'Real Operational Vetting',
-      desc: 'Our spreadsheets and plans are built by veteran culinary operators, ensuring high labor and cost efficiency.',
+      title: 'Practical Industry Experience',
+      desc: 'Our advisory team comprises veteran culinary operators, head chefs, and commercial site PMCs.',
     },
     {
-      title: 'Asymmetric Spatial Design',
-      desc: 'Visual spaces engineered specifically to maximize occupancy turn, customer sensory comfort, and workflow throughput.',
+      title: 'End-to-End Project Support',
+      desc: 'We walk with you from initial location scouting and permitting to turnkey handovers and training.',
     },
     {
-      title: 'Local Gurugram Integration',
-      desc: 'Deep regional vendor networks in the National Capital Region for rapid site mobilization and permitting.',
+      title: 'Customized Business Solutions',
+      desc: 'No templates or boilerplate packages. We build layouts and business designs tailored specifically to your site.',
     },
     {
-      title: 'Uncompromised Luxury Standards',
-      desc: 'A refusal of standard templates, selecting rich tactile materials and flawless execution details.',
+      title: 'Efficient Execution',
+      desc: 'Strong local NCR contractor networks enable rapid mobilization, preventing budget creeps and scheduling delays.',
+    },
+    {
+      title: 'Long-Term Business Support',
+      desc: 'We remain your partner post-launch, providing operational audits, Zomato/Swiggy marketing, and menu updates.',
     },
   ];
 

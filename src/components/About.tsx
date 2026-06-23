@@ -89,21 +89,37 @@ export default function About() {
           {/* Left Column: Big Quote */}
           <div className="about-left">
             <h2 className="about-quote display-serif-italic">
-              “We don’t just engineer layouts; we translate ambitious visions into highly profitable operational realities.”
+              “Building businesses through planning, execution & growth.”
             </h2>
           </div>
 
           {/* Right Column: Narrative + Stats Pills */}
           <div className="about-right">
             <p className="about-description">
-              Vyom Ventures is a premier project delivery and business consulting partner for the modern food, hospitality, and entertainment sectors. We serve as the singular bridge between a creative business spark and a high-yielding physical ecosystem.
+              Vyom Ventures is a consultancy and project management company focused on helping entrepreneurs turn their ideas into well-planned and professionally executed businesses.
             </p>
             <p className="about-description">
-              By aligning concept curation, space planning, construction management, and metric-driven operational analysis, we ensure every detail of your brand is built to perform.
+              We provide end-to-end support for Restaurants, Cafes, Cloud Kitchens, Gaming Zones, and Hospitality Projects. From initial planning and setup to operations and business improvement, we help businesses build strong foundations for long-term growth.
             </p>
 
+            {/* Mission & Vision Block */}
+            <div className="about-mission-vision" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '1rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(200, 169, 110, 0.15)' }}>
+              <div>
+                <h4 className="font-mono-accent" style={{ marginBottom: '0.4rem', fontSize: '0.7rem' }}>Our Mission</h4>
+                <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.5', textAlign: 'left' }}>
+                  To provide practical, professional, and result-oriented business solutions that help entrepreneurs build and manage successful ventures.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-mono-accent" style={{ marginBottom: '0.4rem', fontSize: '0.7rem' }}>Our Vision</h4>
+                <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.5', textAlign: 'left' }}>
+                  To become a trusted consultancy partner for hospitality and entertainment businesses across India.
+                </p>
+              </div>
+            </div>
+
             {/* Feature stats pills container */}
-            <div className="about-stats-grid">
+            <div className="about-stats-grid" style={{ marginTop: '2rem' }}>
               <StatItem end={1} prefix="₹" suffix="Cr+" label="Capital Secured" />
               <StatItem end={20} suffix="+" label="Locations Launched" />
               <StatItem end={4.8} suffix="/5" decimals={1} label="Client Rating" />

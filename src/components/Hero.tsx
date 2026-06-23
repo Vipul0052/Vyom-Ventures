@@ -86,8 +86,8 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
     }
   };
 
-  const line1 = ["Turning", "Ideas", "Into"];
-  const line2 = ["Profitable", "Businesses"];
+  const line1 = ["Ideas", "Into"];
+  const line2 = ["Action"];
 
   return (
     <section ref={containerRef} id="hero" className="hero-section">
@@ -105,7 +105,7 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
           </div>
         </div>
       </div>
-
+ 
       <div className="hero-grid">
         {/* Left aligned content column */}
         <div className="hero-content">
@@ -126,10 +126,10 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
               ))}
             </div>
           </h1>
-
+ 
           {/* Subtext */}
           <p ref={subtextRef} className="hero-subtext">
-            We partner with visionary restaurants, hospitality, food, and gaming brands to scale operations, optimize business metrics, and build premium physical spaces. We also build restaurants.
+            Building businesses through planning, execution & growth. Vyom Ventures is a consultancy and project management company focused on helping entrepreneurs turn their ideas into well-planned and professionally executed businesses.
           </p>
 
           {/* CTAs */}

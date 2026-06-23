@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
 :root {
-  --bg-primary: #f8fafc;
-  --color-gold: #b38e46;
-  --color-offwhite: #0f172a;
-  --bg-surface: rgba(255, 255, 255, 0.45);
-  --bg-hover: rgba(255, 255, 255, 0.65);
-  --color-muted: #475569;
-  --border-glass: rgba(255, 255, 255, 0.5);
-  --border-glass-hover: rgba(179, 142, 70, 0.25);
-  --shadow-glass: 0 8px 32px 0 rgba(15, 23, 42, 0.04);
-  --shadow-glass-hover: 0 12px 40px 0 rgba(15, 23, 42, 0.08);
+  --bg-primary: #0A0F1C;
+  --color-gold: #C8A96E;
+  --color-offwhite: #F5F0E8;
+  --bg-surface: #141B2B;
+  --bg-hover: #1E2D42;
+  --color-muted: #6B7A8D;
+  --border-glass: rgba(200, 169, 110, 0.1);
+  --border-glass-hover: rgba(200, 169, 110, 0.25);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --shadow-glass-hover: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
   
   --font-display: 'Cormorant Garamond', serif;
   --font-sans: 'DM Sans', sans-serif;

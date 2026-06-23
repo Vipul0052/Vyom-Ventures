@@ -74,7 +74,7 @@ function App() {
 
       {/* Floating Call CTA */}
       <a 
-        href="tel:+919999999999" 
+        href="tel:+91XXXXXXXXXX" 
         className={`call-float-btn ${isLoading ? 'call-hidden' : ''}`} 
         aria-label="Call Us"
       >
@@ -85,7 +85,7 @@ function App() {
 
       {/* Floating WhatsApp CTA */}
       <a 
-        href="https://wa.me/919999999999?text=Hi%20Vyom%20Ventures,%20I'd%20like%20to%20inquire%20about%20your%20services." 
+        href="https://wa.me/91XXXXXXXXXX?text=Hi%20Vyom%20Ventures,%20I'd%20like%20to%20inquire%20about%20your%20services." 
         className={`whatsapp-float-btn ${isLoading ? 'whatsapp-hidden' : ''}`} 
         target="_blank" 
         rel="noopener noreferrer"
