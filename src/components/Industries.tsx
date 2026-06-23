@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 
 export default function Industries() {
@@ -7,32 +6,32 @@ export default function Industries() {
     { 
       num: '01', 
       name: 'Premium Restaurants',
-      image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80'
+      image: '/prem restaurent.png'
     },
     { 
       num: '02', 
       name: 'Bespoke Cafes & Bakeries',
-      image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80'
+      image: '/cafes and bakeries.png'
     },
     { 
       num: '03', 
       name: 'Multi-Brand Cloud Kitchens',
-      image: 'https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?auto=format&fit=crop&w=600&q=80'
+      image: '/cloud kitchen.png'
     },
     { 
       num: '04', 
       name: 'Modern Gaming & Tech Arenas',
-      image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80'
+      image: '/gaming zone.png'
     },
     { 
       num: '05', 
       name: 'Luxury Hospitality & Resorts',
-      image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80'
+      image: '/resort.png'
     },
     { 
       num: '06', 
       name: 'Corporate Food Courts',
-      image: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80'
+      image: '/food court.png'
     },
   ];
 
@@ -40,6 +39,7 @@ export default function Industries() {
   const previewRef = useRef<HTMLDivElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+  // ── Desktop: cursor-following image preview ──
   useEffect(() => {
     const list = listRef.current;
     if (!list) return;
@@ -62,6 +62,28 @@ export default function Industries() {
     };
   }, []);
 
+  // ── Mobile: auto-cycling carousel ──
+  const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
+  const mobileTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const goNext = useCallback(() => {
+    setMobileActiveIndex(prev => (prev + 1) % industries.length);
+  }, [industries.length]);
+
+  useEffect(() => {
+    mobileTimerRef.current = setInterval(goNext, 3500);
+    return () => {
+      if (mobileTimerRef.current) clearInterval(mobileTimerRef.current);
+    };
+  }, [goNext]);
+
+  const handleDotClick = (idx: number) => {
+    setMobileActiveIndex(idx);
+    // Reset timer on manual interaction
+    if (mobileTimerRef.current) clearInterval(mobileTimerRef.current);
+    mobileTimerRef.current = setInterval(goNext, 3500);
+  };
+
   return (
     <section id="industries" className="industries-section">
       <div className="industries-container">
@@ -70,6 +92,7 @@ export default function Industries() {
           <span className="font-mono-accent">04 // Core Verticals</span>
         </div>
 
+        {/* Desktop: Full-width industry list with cursor-following photo */}
         <div ref={listRef} className="industries-list">
           {industries.map((ind, idx) => (
             <div 
@@ -87,49 +110,72 @@ export default function Industries() {
                   <span className="industry-num font-mono-accent">{ind.num}</span>
                   <h3 className="industry-name">{ind.name}</h3>
                 </div>
-                <div className="industry-arrow-box">
-                  <ArrowUpRight className="industry-arrow" size={32} strokeWidth={1} />
-                </div>
-              </div>
-
-              {/* Inline image wrapper for mobile view */}
-              <div className="industry-mobile-image-wrapper">
-                <img 
-                  src={ind.image} 
-                  alt={ind.name} 
-                  className="industry-mobile-image" 
-                  loading="lazy"
-                />
               </div>
             </div>
           ))}
           {/* Bottom border line for final item */}
           <div className="industry-list-bottom-line" />
         </div>
-      </div>
 
-      {/* Floating Image Preview overlay for desktop cursor-following reveal */}
-      <div 
-        ref={previewRef} 
-        className={`industry-image-preview ${hoveredIndex !== null ? 'visible' : ''}`}
-      >
+        {/* Desktop: Floating cursor-following Image Preview */}
         <div 
-          className="preview-slides-container" 
-          style={{ 
-            transform: `translateY(-${(hoveredIndex || 0) * 100}%)`,
-            height: '100%', 
-            transition: 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)' 
-          }}
+          ref={previewRef} 
+          className={`industry-image-preview ${hoveredIndex !== null ? 'visible' : ''}`}
         >
-          {industries.map((ind) => (
-            <div key={ind.num} className="preview-slide" style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
-              <img 
-                src={ind.image} 
-                alt={ind.name} 
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-              />
+          <div 
+            className="preview-slides-container" 
+            style={{ 
+              transform: `translateY(-${(hoveredIndex || 0) * 100}%)`,
+              height: '100%', 
+              transition: 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)' 
+            }}
+          >
+            {industries.map((ind) => (
+              <div key={ind.num} className="preview-slide" style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
+                <img 
+                  src={ind.image} 
+                  alt={ind.name} 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile: Auto-scrolling horizontal photo carousel */}
+        <div className="industries-mobile-carousel">
+          <div className="mobile-carousel-viewport">
+            <div 
+              className="mobile-carousel-strip"
+              style={{ transform: `translateX(-${mobileActiveIndex * 100}%)` }}
+            >
+              {industries.map((ind) => (
+                <div key={ind.num} className="mobile-carousel-slide">
+                  <img 
+                    src={ind.image} 
+                    alt={ind.name} 
+                    className="mobile-carousel-img"
+                    loading="lazy"
+                  />
+                  <div className="mobile-carousel-overlay">
+                    <span className="mobile-carousel-num">{ind.num}</span>
+                    <span className="mobile-carousel-label">{ind.name}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          {/* Dot indicators */}
+          <div className="mobile-carousel-dots">
+            {industries.map((_, idx) => (
+              <button 
+                key={idx} 
+                className={`mobile-dot ${mobileActiveIndex === idx ? 'mobile-dot-active' : ''}`}
+                onClick={() => handleDotClick(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

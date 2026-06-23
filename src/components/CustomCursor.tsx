@@ -1,41 +1,33 @@
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
+import { useEffect, useState } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function CustomCursor({ isLoading }: { isLoading?: boolean }) {
-  const cursorRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  // Set up spring physics for an organic tracking lag
+  const springConfig = { damping: 30, stiffness: 350, mass: 0.5 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
     if (isLoading) return;
-    // Disable on devices that do not support hover/pointer interactions (mobile/tablet touch-only)
+
+    // Verify hover support (exclude touch devices)
     const hasHover = window.matchMedia('(hover: hover)').matches;
     if (!hasHover) return;
 
-    const cursor = cursorRef.current;
-    if (!cursor) return;
-
-    let isVisible = false;
-
-    // Set initial position out of screen
-    gsap.set(cursor, { xPercent: -50, yPercent: -50, scale: 0 });
-
     const onMouseMove = (e: MouseEvent) => {
-      if (!isVisible) {
-        isVisible = true;
-        gsap.to(cursor, { scale: 1, duration: 0.15 });
-      }
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.1, // Smooth lag
-        ease: 'power2.out',
-        overwrite: 'auto'
-      });
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
     };
 
     const onMouseLeave = () => {
-      isVisible = false;
-      gsap.to(cursor, { scale: 0, duration: 0.15 });
+      setIsVisible(false);
     };
 
     const onMouseOver = (e: MouseEvent) => {
@@ -47,7 +39,8 @@ export default function CustomCursor({ isLoading }: { isLoading?: boolean }) {
         target.closest('.industry-item') ||
         target.closest('input') ||
         target.closest('textarea') ||
-        target.closest('.clickable')
+        target.closest('.clickable') ||
+        target.classList.contains('mobile-menu-link')
       )) {
         setIsHovered(true);
       }
@@ -62,7 +55,8 @@ export default function CustomCursor({ isLoading }: { isLoading?: boolean }) {
         target.closest('.industry-item') ||
         target.closest('input') ||
         target.closest('textarea') ||
-        target.closest('.clickable')
+        target.closest('.clickable') ||
+        target.classList.contains('mobile-menu-link')
       )) {
         setIsHovered(false);
       }
@@ -79,13 +73,24 @@ export default function CustomCursor({ isLoading }: { isLoading?: boolean }) {
       window.removeEventListener('mouseover', onMouseOver);
       window.removeEventListener('mouseout', onMouseOut);
     };
-  }, [isLoading]); // Re-run when loading state changes
+  }, [isLoading, isVisible]);
+
+  if (isLoading || !isVisible) return null;
 
   return (
-    <div
-      ref={cursorRef}
+    <motion.div
       className={`custom-cursor ${isHovered ? 'expanded' : ''}`}
-      style={{ display: 'block', transform: 'translate(-50%, -50%) scale(0)' }}
+      style={{
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        x: cursorXSpring,
+        y: cursorYSpring,
+        translateX: '-50%',
+        translateY: '-50%',
+        pointerEvents: 'none',
+        zIndex: 10000,
+      }}
     />
   );
 }

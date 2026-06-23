@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
-import gsap from 'gsap';
+import React, { useRef, useState } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 interface MagneticProps {
   children: React.ReactElement;
@@ -8,66 +8,50 @@ interface MagneticProps {
 }
 
 export default function Magnetic({ children, range = 75, strength = 0.28 }: MagneticProps) {
-  const containerRef = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    // Disable on mobile/tablet devices
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) return;
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+    
+    const distanceX = clientX - centerX;
+    const distanceY = clientY - centerY;
+    const distance = Math.hypot(distanceX, distanceY);
 
-    const el = containerRef.current;
-    if (!el) return;
+    // If cursor is within range, magnetic attract. Else, remain still.
+    if (distance < range) {
+      setPosition({ x: distanceX * strength, y: distanceY * strength });
+    } else {
+      setPosition({ x: 0, y: 0 });
+    }
+  };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      const elCenterX = rect.left + rect.width / 2;
-      const elCenterY = rect.top + rect.height / 2;
-      
-      const distanceX = e.clientX - elCenterX;
-      const distanceY = e.clientY - elCenterY;
-      const distance = Math.hypot(distanceX, distanceY);
+  const handleMouseLeave = () => {
+    setPosition({ x: 0, y: 0 });
+  };
 
-      if (distance < range) {
-        // Move element toward cursor
-        gsap.to(el, {
-          x: distanceX * strength,
-          y: distanceY * strength,
-          duration: 0.3,
-          ease: 'power3.out',
-          overwrite: 'auto',
-        });
-      } else {
-        // Snap back to original position
-        gsap.to(el, {
-          x: 0,
-          y: 0,
-          duration: 0.6,
-          ease: 'elastic.out(1, 0.3)',
-          overwrite: 'auto',
-        });
-      }
-    };
+  // Replicate elastic snapping physics
+  const springConfig = { damping: 12, stiffness: 120, mass: 0.12 };
+  const x = useSpring(useMotionValue(0), springConfig);
+  const y = useSpring(useMotionValue(0), springConfig);
 
-    const handleMouseLeave = () => {
-      gsap.to(el, {
-        x: 0,
-        y: 0,
-        duration: 0.6,
-        ease: 'elastic.out(1, 0.3)',
-        overwrite: 'auto',
-      });
-    };
+  React.useEffect(() => {
+    x.set(position.x);
+    y.set(position.y);
+  }, [position, x, y]);
 
-    window.addEventListener('mousemove', handleMouseMove);
-    el.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      el.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [range, strength]);
-
-  return React.cloneElement(children, {
-    ref: containerRef,
-  } as any);
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x, y, display: 'inline-block' }}
+    >
+      {children}
+    </motion.div>
+  );
 }
