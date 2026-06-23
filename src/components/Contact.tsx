@@ -46,7 +46,7 @@ export default function Contact() {
             <div className="contact-info-block font-mono-accent">
               <div className="info-item">
                 <span className="info-label">Direct Inquiry</span>
-                <a href="mailto:partner@vyomventures.com" className="info-value">partner@vyomventures.com</a>
+                <a href="mailto:info@vyomventures.com" className="info-value">info@vyomventures.com</a>
               </div>
               <div className="info-item">
                 <span className="info-label">Office Address</span>
