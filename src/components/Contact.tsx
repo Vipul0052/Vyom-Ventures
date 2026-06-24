@@ -54,7 +54,14 @@ export default function Contact() {
               </div>
               <div className="info-item">
                 <span className="info-label">Office Location</span>
-                <span className="info-value">3rd Floor, Reach 3 Roads, Shop No. 311, Sector 70, Gurugram, Haryana 122101</span>
+                <a 
+                  href="https://www.google.com/maps/search/?api=1&query=Reach+3+Roads+Sector+70+Gurugram" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="info-value"
+                >
+                  3rd Floor, Reach 3 Roads, Shop No. 311, Sector 70, Gurugram, Haryana 122101
+                </a>
               </div>
             </div>
           </div>
