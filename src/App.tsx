@@ -78,7 +78,7 @@ function App() {
       {/* Floating Call CTA */}
       <a 
         href="tel:+917078717681" 
-        className={`call-float-btn ${isLoading ? 'call-hidden' : ''}`} 
+        className={`call-float-btn ${!isLoading ? 'visible' : ''}`} 
         aria-label="Call Us"
       >
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -89,7 +89,7 @@ function App() {
       {/* Floating WhatsApp CTA */}
       <a 
         href="https://wa.me/917078717681?text=Hi%20Vyom%20Ventures,%20I'd%20like%20to%20inquire%20about%20your%20services." 
-        className={`whatsapp-float-btn ${isLoading ? 'whatsapp-hidden' : ''}`} 
+        className={`whatsapp-float-btn ${!isLoading ? 'visible' : ''}`} 
         target="_blank" 
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"

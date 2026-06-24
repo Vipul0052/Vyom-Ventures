@@ -374,9 +374,23 @@ h1, h2, h3, h4, h5, h6 {
   height: 90px;
   z-index: 1005;
   transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease, height 0.4s ease, opacity 0.6s ease, transform 0.6s ease;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid rgba(200, 169, 110, 0.12); /* Glassmorphism gold border */
   display: flex;
   align-items: center;
+  /* Hidden by default on mount to prevent layout flash during loader */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
+  /* Glassmorphism by default when visible */
+  background-color: rgba(10, 15, 28, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.navbar-main.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .navbar-hidden {
@@ -553,6 +567,8 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   align-items: center;
   padding-top: 100px;
+  /* Start off-screen by default to prevent flashing on refresh */
+  transform: translateY(-100%);
 }
 
 .mobile-menu-links {
@@ -2168,6 +2184,18 @@ a.info-value:hover {
   letter-spacing: 0.05em;
 }
 
+.location-link {
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: opacity 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.location-link:hover {
+  opacity: 0.8;
+  border-bottom: 1px solid rgba(200, 169, 110, 0.4);
+}
+
 @media (max-width: 768px) {
   .footer-main {
     padding: 2.5rem 1.5rem;
@@ -2204,6 +2232,16 @@ a.info-value:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   z-index: 9998;
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, border-color 0.3s ease, opacity 0.6s ease;
+  /* Hidden by default on mount to prevent flash during loader */
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0);
+}
+
+.whatsapp-float-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
 }
 
 .whatsapp-hidden {
@@ -2244,6 +2282,16 @@ a.info-value:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   z-index: 9998;
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, border-color 0.3s ease, opacity 0.6s ease;
+  /* Hidden by default on mount to prevent flash during loader */
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0);
+}
+
+.call-float-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
 }
 
 .call-hidden {

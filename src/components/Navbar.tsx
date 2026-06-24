@@ -65,7 +65,7 @@ export default function Navbar({ isLoading }: { isLoading?: boolean }) {
 
   return (
     <>
-      <nav className={`navbar-main ${isScrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''} ${isLoading ? 'navbar-hidden' : ''}`}>
+      <nav className={`navbar-main ${isScrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''} ${!isLoading ? 'visible' : ''}`}>
         <div className="navbar-container">
           {/* Logo */}
           <a href="#" className="nav-logo" onClick={(e) => handleLinkClick(e, 'hero')}>
