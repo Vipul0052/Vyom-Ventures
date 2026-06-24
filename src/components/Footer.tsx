@@ -5,7 +5,7 @@ export default function Footer() {
         {/* Left Group: Logo */}
         <div className="footer-left-group">
           <div className="footer-logo">
-            <img src="/download.svg?v=15" alt="Vyom Nexus" className="footer-logo-svg" style={{ objectFit: 'contain', height: '90px', width: 'auto', margin: '-25px 0' }} />
+            <img src="/download.svg?v=23" alt="Vyom Nexus" className="footer-logo-svg" style={{ objectFit: 'contain', height: '28px', width: 'auto' }} />
           </div>
         </div>
 

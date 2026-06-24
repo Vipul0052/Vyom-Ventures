@@ -60,7 +60,7 @@ export default function Contact() {
                   rel="noopener noreferrer" 
                   className="info-value"
                 >
-                  3rd Floor, Reach 3 Roads, Shop No. 311, Sector 70, Gurugram, Haryana 122101
+                  Shop No. 311, 3rd Floor, Reach 3 Roads, Sector 70, Gurugram, Haryana 122101
                 </a>
               </div>
             </div>

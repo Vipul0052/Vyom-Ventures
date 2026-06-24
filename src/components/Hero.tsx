@@ -94,7 +94,7 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
       {/* Intro cinematic loader overlay */}
       <div ref={overlayRef} className="hero-loader-overlay">
         <div className="hero-loader-content">
-          <img src="/download.svg?v=15" alt="Vyom Nexus" className="loader-logo-svg" style={{ objectFit: 'contain', height: '250px', width: 'auto', margin: '-80px 0' }} />
+          <img src="/download.svg?v=23" alt="Vyom Nexus" className="loader-logo-svg" />
           <div className="loader-line-wrapper">
             <div ref={loadingLineRef} className="hero-loader-line" />
           </div>

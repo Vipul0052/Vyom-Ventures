@@ -21,7 +21,14 @@ export default function Navbar({ isLoading }: { isLoading?: boolean }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       // Animate overlay open
@@ -69,7 +76,7 @@ export default function Navbar({ isLoading }: { isLoading?: boolean }) {
         <div className="navbar-container">
           {/* Logo */}
           <a href="#" className="nav-logo" onClick={(e) => handleLinkClick(e, 'hero')}>
-            <img src="/download.svg?v=15" alt="Vyom Nexus" className="logo-svg" style={{ objectFit: 'contain', height: '140px', width: 'auto', margin: '-45px 0' }} />
+            <img src="/download.svg?v=23" alt="Vyom Nexus" className="logo-svg" style={{ objectFit: 'contain', height: '26px', width: 'auto' }} />
           </a>
 
           {/* Desktop Nav Links */}

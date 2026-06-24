@@ -32,6 +32,18 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = 'hidden';
+      window.scrollTo(0, 0);
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isLoading]);
+
 
 
   return (
@@ -75,7 +87,6 @@ function App() {
       {/* Single-line footer with location indicators */}
       <Footer />
 
-      {/* Floating Call CTA */}
       <a 
         href="tel:+917078717681" 
         className={`call-float-btn ${!isLoading ? 'visible' : ''}`} 
@@ -86,7 +97,6 @@ function App() {
         </svg>
       </a>
 
-      {/* Floating WhatsApp CTA */}
       <a 
         href="https://wa.me/917078717681?text=Hi%20Vyom%20Ventures,%20I'd%20like%20to%20inquire%20about%20your%20services." 
         className={`whatsapp-float-btn ${!isLoading ? 'visible' : ''}`} 
