@@ -46,15 +46,15 @@ export default function Contact() {
             <div className="contact-info-block font-mono-accent">
               <div className="info-item">
                 <span className="info-label">Direct Inquiry</span>
-                <a href="mailto:info@vyomventures.com" className="info-value">info@vyomventures.com</a>
+                <a href="mailto:info@vyomnexus.in" className="info-value">info@vyomnexus.in</a>
               </div>
               <div className="info-item">
                 <span className="info-label">Call Support</span>
-                <a href="tel:+91XXXXXXXXXX" className="info-value">+91 XXXXXXXXXX</a>
+                <a href="tel:+917078717681" className="info-value">+91 70787 17681</a>
               </div>
               <div className="info-item">
                 <span className="info-label">Office Location</span>
-                <span className="info-value">Gurugram, Haryana, India</span>
+                <span className="info-value">3rd Floor, Reach 3 Roads, Shop No. 311, Sector 70, Gurugram, Haryana 122101</span>
               </div>
             </div>
           </div>

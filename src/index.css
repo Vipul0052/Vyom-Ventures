@@ -387,7 +387,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-main.scrolled {
   height: 75px;
-  background-color: rgba(248, 250, 252, 0.75);
+  background-color: rgba(10, 15, 28, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(179, 142, 70, 0.15);
@@ -439,10 +439,10 @@ h1, h2, h3, h4, h5, h6 {
 .brand-name {
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.15em;
+  font-size: 1.18rem;
+  letter-spacing: 0.18em;
   color: var(--color-offwhite);
-  line-height: 1.2;
+  line-height: 1;
 }
 
 .brand-caption {
@@ -545,7 +545,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(248, 250, 252, 0.95);
+  background-color: rgba(10, 15, 28, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 1000;

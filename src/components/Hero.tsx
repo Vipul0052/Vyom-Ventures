@@ -94,18 +94,13 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
       {/* Intro cinematic loader overlay */}
       <div ref={overlayRef} className="hero-loader-overlay">
         <div className="hero-loader-content">
-          <svg viewBox="0 0 100 100" className="loader-logo-svg" fill="none">
-            <path d="M25 35 L50 75" stroke="var(--color-gold)" strokeWidth="4" strokeLinecap="round" />
-            <path d="M50 75 L75 15" stroke="var(--color-gold)" strokeWidth="4" strokeLinecap="round" />
-            <path d="M62 25 L75 15 L77 31" stroke="var(--color-gold)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span className="loader-brand-name">VYOM VENTURES</span>
+          <img src="/download.svg?v=15" alt="Vyom Nexus" className="loader-logo-svg" style={{ objectFit: 'contain', height: '250px', width: 'auto', margin: '-80px 0' }} />
           <div className="loader-line-wrapper">
             <div ref={loadingLineRef} className="hero-loader-line" />
           </div>
         </div>
       </div>
- 
+
       <div className="hero-grid">
         {/* Left aligned content column */}
         <div className="hero-content">
@@ -126,10 +121,10 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
               ))}
             </div>
           </h1>
- 
+
           {/* Subtext */}
           <p ref={subtextRef} className="hero-subtext">
-            Building businesses through planning, execution & growth. Vyom Ventures is a consultancy and project management company focused on helping entrepreneurs turn their ideas into well-planned and professionally executed businesses.
+            Building businesses through planning, execution & growth. Vyom Nexus is a consultancy and project management company focused on helping entrepreneurs turn their ideas into well-planned and professionally executed businesses.
           </p>
 
           {/* CTAs */}

@@ -69,15 +69,7 @@ export default function Navbar({ isLoading }: { isLoading?: boolean }) {
         <div className="navbar-container">
           {/* Logo */}
           <a href="#" className="nav-logo" onClick={(e) => handleLinkClick(e, 'hero')}>
-            <svg viewBox="0 0 100 100" className="logo-svg" fill="none">
-              <path d="M25 35 L50 75" stroke="var(--color-gold)" strokeWidth="4" strokeLinecap="round" />
-              <path d="M50 75 L75 15" stroke="var(--color-gold)" strokeWidth="4" strokeLinecap="round" />
-              <path d="M62 25 L75 15 L77 31" stroke="var(--color-gold)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <div className="logo-text">
-              <span className="brand-name">VYOM VENTURES</span>
-              <span className="brand-caption">IDEAS INTO ACTION</span>
-            </div>
+            <img src="/download.svg?v=15" alt="Vyom Nexus" className="logo-svg" style={{ objectFit: 'contain', height: '140px', width: 'auto', margin: '-45px 0' }} />
           </a>
 
           {/* Desktop Nav Links */}
