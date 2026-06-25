@@ -96,7 +96,7 @@ export default function About() {
           {/* Right Column: Narrative + Stats Pills */}
           <div className="about-right">
             <p className="about-description">
-              Vyom Ventures is a consultancy and project management company focused on helping entrepreneurs turn their ideas into well-planned and professionally executed businesses.
+              Vyom Nexus is a consultancy and project management company focused on helping entrepreneurs turn their ideas into well-planned and professionally executed businesses.
             </p>
             <p className="about-description">
               We provide end-to-end support for Restaurants, Cafes, Cloud Kitchens, Gaming Zones, and Hospitality Projects. From initial planning and setup to operations and business improvement, we help businesses build strong foundations for long-term growth.

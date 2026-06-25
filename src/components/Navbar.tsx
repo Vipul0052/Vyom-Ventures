@@ -76,7 +76,7 @@ export default function Navbar({ isLoading }: { isLoading?: boolean }) {
         <div className="navbar-container">
           {/* Logo */}
           <a href="#" className="nav-logo" onClick={(e) => handleLinkClick(e, 'hero')}>
-            <img src="/download.svg?v=23" alt="Vyom Ventures" className="logo-svg" style={{ objectFit: 'contain', height: '26px', width: 'auto' }} />
+            <img src="/download.svg?v=23" alt="Vyom Nexus" className="logo-svg" style={{ objectFit: 'contain', height: '26px', width: 'auto' }} />
           </a>
 
           {/* Desktop Nav Links */}

@@ -5,7 +5,7 @@ export default function Footer() {
         {/* Left Group: Logo */}
         <div className="footer-left-group">
           <div className="footer-logo">
-            <img src="/download.svg?v=23" alt="Vyom Ventures" className="footer-logo-svg" style={{ objectFit: 'contain', height: '28px', width: 'auto' }} />
+            <img src="/download.svg?v=23" alt="Vyom Nexus" className="footer-logo-svg" style={{ objectFit: 'contain', height: '28px', width: 'auto' }} />
           </div>
         </div>
 
@@ -51,7 +51,7 @@ export default function Footer() {
 
         {/* Right Group: Copyright */}
         <div className="footer-copyright font-mono-accent">
-          © {new Date().getFullYear()} Vyom Ventures. All rights reserved.
+          © {new Date().getFullYear()} Vyom Nexus. All rights reserved.
         </div>
       </div>
     </footer>

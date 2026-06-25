@@ -98,7 +98,7 @@ function App() {
       </a>
 
       <a 
-        href="https://wa.me/917078717681?text=Hi%20Vyom%20Ventures,%20I'd%20like%20to%20inquire%20about%20your%20services." 
+        href="https://wa.me/917078717681?text=Hi%20Vyom%20Nexus,%20I'd%20like%20to%20inquire%20about%20your%20services." 
         className={`whatsapp-float-btn ${!isLoading ? 'visible' : ''}`} 
         target="_blank" 
         rel="noopener noreferrer"

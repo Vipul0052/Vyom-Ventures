@@ -1,6 +1,6 @@
 export default function MarqueeTicker() {
   const items = [
-    { text: 'VYOM VENTURES', highlight: true },
+    { text: 'VYOM NEXUS', highlight: true },
     { text: 'IDEAS INTO ACTION', highlight: true },
     { text: 'RESTAURANTS', highlight: false },
     { text: 'CAFES', highlight: false },
