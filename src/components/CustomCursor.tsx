@@ -20,7 +20,11 @@ export default function CustomCursor({ isLoading }: { isLoading?: boolean }) {
     const hasHover = window.matchMedia('(hover: hover)').matches;
     if (!hasHover) return;
 
+    const mousePos = { x: -1, y: -1 };
+
     const onMouseMove = (e: MouseEvent) => {
+      mousePos.x = e.clientX;
+      mousePos.y = e.clientY;
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       if (!isVisible) setIsVisible(true);
@@ -30,34 +34,40 @@ export default function CustomCursor({ isLoading }: { isLoading?: boolean }) {
       setIsVisible(false);
     };
 
+    const checkInteractive = (element: HTMLElement | null): boolean => {
+      if (!element) return false;
+      return !!(
+        element.closest('a') || 
+        element.closest('button') || 
+        element.closest('.premium-card') || 
+        element.closest('.industry-item') ||
+        element.closest('input') ||
+        element.closest('textarea') ||
+        element.closest('.clickable') ||
+        element.classList.contains('mobile-menu-link')
+      );
+    };
+
     const onMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target && (
-        target.closest('a') || 
-        target.closest('button') || 
-        target.closest('.premium-card') || 
-        target.closest('.industry-item') ||
-        target.closest('input') ||
-        target.closest('textarea') ||
-        target.closest('.clickable') ||
-        target.classList.contains('mobile-menu-link')
-      )) {
+      if (checkInteractive(target)) {
         setIsHovered(true);
       }
     };
 
     const onMouseOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target && (
-        target.closest('a') || 
-        target.closest('button') || 
-        target.closest('.premium-card') || 
-        target.closest('.industry-item') ||
-        target.closest('input') ||
-        target.closest('textarea') ||
-        target.closest('.clickable') ||
-        target.classList.contains('mobile-menu-link')
-      )) {
+      if (checkInteractive(target)) {
+        setIsHovered(false);
+      }
+    };
+
+    const onScroll = () => {
+      if (mousePos.x === -1 || mousePos.y === -1) return;
+      const element = document.elementFromPoint(mousePos.x, mousePos.y) as HTMLElement | null;
+      if (checkInteractive(element)) {
+        setIsHovered(true);
+      } else {
         setIsHovered(false);
       }
     };
@@ -66,12 +76,14 @@ export default function CustomCursor({ isLoading }: { isLoading?: boolean }) {
     document.addEventListener('mouseleave', onMouseLeave);
     window.addEventListener('mouseover', onMouseOver);
     window.addEventListener('mouseout', onMouseOut);
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseleave', onMouseLeave);
       window.removeEventListener('mouseover', onMouseOver);
       window.removeEventListener('mouseout', onMouseOut);
+      window.removeEventListener('scroll', onScroll);
     };
   }, [isLoading, isVisible]);
 

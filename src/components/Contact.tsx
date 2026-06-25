@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Magnetic from './Magnetic';
 
 export default function Contact() {
@@ -6,13 +6,49 @@ export default function Contact() {
     name: '',
     phone: '',
     businessType: '',
+    services: [] as string[],
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const serviceOptions = [
+    'Consultancy & Strategy',
+    'Turnkey Setup',
+    'Kitchen Design & Layout',
+    'Culinary & Costing',
+    'SOPs & Recruitment',
+    'Operations & Growth',
+    'Branding & Marketing',
+    'Project PMC'
+  ];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleServiceToggle = (service: string) => {
+    setFormData((prev) => {
+      const isSelected = prev.services.includes(service);
+      const updatedServices = isSelected
+        ? prev.services.filter((s) => s !== service)
+        : [...prev.services, service];
+      return { ...prev, services: updatedServices };
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -22,7 +58,7 @@ export default function Contact() {
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
-      setFormData({ name: '', phone: '', businessType: '', message: '' });
+      setFormData({ name: '', phone: '', businessType: '', services: [], message: '' });
     }, 3000);
   };
 
@@ -109,6 +145,45 @@ export default function Contact() {
                     required
                   />
                 </div>
+
+                <div className="form-group services-selection-group" ref={dropdownRef}>
+                  <label className="form-label font-mono-accent">Services Required</label>
+                  <div className="custom-dropdown-container">
+                    <button
+                      type="button"
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      className={`custom-dropdown-trigger ${isDropdownOpen ? 'active' : ''}`}
+                    >
+                      <span className="trigger-text">
+                        {formData.services.length === 0
+                          ? 'Select Services'
+                          : `${formData.services.length} ${formData.services.length === 1 ? 'Service' : 'Services'} Selected`}
+                      </span>
+                      <span className={`trigger-arrow ${isDropdownOpen ? 'rotated' : ''}`}>▼</span>
+                    </button>
+
+                    {isDropdownOpen && (
+                      <div className="custom-dropdown-menu">
+                        {serviceOptions.map((option) => {
+                          const isSelected = formData.services.includes(option);
+                          return (
+                            <label key={option} className="dropdown-item-label">
+                              <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={() => handleServiceToggle(option)}
+                                className="dropdown-checkbox"
+                              />
+                              <span className="checkbox-custom"></span>
+                              <span className="dropdown-item-text">{option}</span>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 <div className="form-group">
                   <textarea
                     name="message"

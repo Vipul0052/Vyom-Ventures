@@ -94,7 +94,7 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
       {/* Intro cinematic loader overlay */}
       <div ref={overlayRef} className="hero-loader-overlay">
         <div className="hero-loader-content">
-          <img src="/download.svg?v=23" alt="Vyom Nexus" className="loader-logo-svg" />
+          <img src="/download.svg?v=23" alt="Vyom Ventures" className="loader-logo-svg" />
           <div className="loader-line-wrapper">
             <div ref={loadingLineRef} className="hero-loader-line" />
           </div>
@@ -104,6 +104,9 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
       <div className="hero-grid">
         {/* Left aligned content column */}
         <div className="hero-content">
+          {/* Ambient background gold glow behind text */}
+          <div className="hero-headline-glow" />
+
           {/* Headline */}
           <h1 className="hero-headline" style={{ marginTop: '2rem' }}>
             <div className="headline-line">
@@ -124,7 +127,7 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
 
           {/* Subtext */}
           <p ref={subtextRef} className="hero-subtext">
-            Building businesses through planning, execution & growth. Vyom Nexus is a consultancy and project management company focused on helping entrepreneurs turn their ideas into well-planned and professionally executed businesses.
+            Building businesses through planning, execution & growth. Vyom Ventures is a consultancy and project management company focused on helping entrepreneurs turn their ideas into well-planned and professionally executed businesses.
           </p>
 
           {/* CTAs */}
@@ -161,8 +164,8 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
             {/* Card 2: Revenue Targets */}
             <div className="floating-card floating-card-2">
               <div className="card-tag">Performance metrics</div>
-              <h3>Quarterly Revenue Target</h3>
-              <div className="stat-value">₹1.2Cr</div>
+              <h3>Yearly Revenue Target</h3>
+              <div className="stat-value">₹2 Lakh/Yr</div>
               <div className="progress-label">
                 <span>78% achieved</span>
                 <span className="gold-text">+12% vs last month</span>

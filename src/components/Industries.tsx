@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 export default function Industries() {
@@ -39,12 +39,32 @@ export default function Industries() {
   const previewRef = useRef<HTMLDivElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // ── Desktop: cursor-following image preview ──
+  // ── Desktop: cursor-following image preview & hover tracker ──
   useEffect(() => {
-    const list = listRef.current;
-    if (!list) return;
+    const isDesktop = window.innerWidth > 1024;
+    if (!isDesktop) return;
+
+    const mousePos = { x: -1, y: -1 };
+
+    const updateHoverState = (x: number, y: number) => {
+      const element = document.elementFromPoint(x, y);
+      if (!element) return;
+
+      const hoveredItem = element.closest('.industry-item');
+      if (hoveredItem) {
+        const indexAttr = hoveredItem.getAttribute('data-index');
+        if (indexAttr !== null) {
+          setHoveredIndex(parseInt(indexAttr, 10));
+          return;
+        }
+      }
+      setHoveredIndex(null);
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
+      mousePos.x = e.clientX;
+      mousePos.y = e.clientY;
+
       if (previewRef.current) {
         gsap.to(previewRef.current, {
           x: e.clientX,
@@ -54,35 +74,98 @@ export default function Industries() {
           overwrite: 'auto'
         });
       }
+
+      updateHoverState(e.clientX, e.clientY);
+    };
+
+    const handleScroll = () => {
+      if (mousePos.x === -1 || mousePos.y === -1) return;
+      updateHoverState(mousePos.x, mousePos.y);
+    };
+
+    const handleMouseLeave = () => {
+      setHoveredIndex(null);
+      mousePos.x = -1;
+      mousePos.y = -1;
     };
 
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    document.addEventListener('mouseleave', handleMouseLeave);
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
 
-  // ── Mobile: auto-cycling carousel ──
-  const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
-  const mobileTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const goNext = useCallback(() => {
-    setMobileActiveIndex(prev => (prev + 1) % industries.length);
-  }, [industries.length]);
-
   useEffect(() => {
-    mobileTimerRef.current = setInterval(goNext, 3500);
-    return () => {
-      if (mobileTimerRef.current) clearInterval(mobileTimerRef.current);
-    };
-  }, [goNext]);
+    const items = document.querySelectorAll('.industry-item');
 
-  const handleDotClick = (idx: number) => {
-    setMobileActiveIndex(idx);
-    // Reset timer on manual interaction
-    if (mobileTimerRef.current) clearInterval(mobileTimerRef.current);
-    mobileTimerRef.current = setInterval(goNext, 3500);
-  };
+    // 1. Desktop setup (IntersectionObserver)
+    const isDesktop = window.innerWidth > 1024;
+    let observer: IntersectionObserver | null = null;
+
+    if (isDesktop) {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('scroll-active');
+          } else {
+            entry.target.classList.remove('scroll-active');
+          }
+        });
+      }, {
+        threshold: 0.05,
+        rootMargin: '5% 0px 5% 0px'
+      });
+
+      items.forEach(item => observer?.observe(item));
+    }
+
+    // 2. Mobile/Tablet setup (Center scroll focus calculation)
+    const handleMobileScroll = () => {
+      const isMobile = window.innerWidth <= 1024;
+      if (!isMobile) return;
+
+      const centerY = window.innerHeight / 2;
+      let closestItem: Element | null = null;
+      let minDistance = Infinity;
+
+      items.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        const itemMidY = rect.top + rect.height / 2;
+        const distance = Math.abs(itemMidY - centerY);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestItem = item;
+        }
+      });
+
+      items.forEach(item => {
+        if (item === closestItem) {
+          item.classList.add('scroll-active');
+        } else {
+          item.classList.remove('scroll-active');
+        }
+      });
+    };
+
+    if (!isDesktop) {
+      handleMobileScroll();
+      window.addEventListener('scroll', handleMobileScroll, { passive: true });
+      window.addEventListener('resize', handleMobileScroll);
+    }
+
+    return () => {
+      if (observer) {
+        items.forEach(item => observer?.unobserve(item));
+      }
+      window.removeEventListener('scroll', handleMobileScroll);
+      window.removeEventListener('resize', handleMobileScroll);
+    };
+  }, []);
 
   return (
     <section id="industries" className="industries-section">
@@ -92,12 +175,13 @@ export default function Industries() {
           <span className="font-mono-accent">04 // Core Verticals</span>
         </div>
 
-        {/* Desktop: Full-width industry list with cursor-following photo */}
+        {/* Industry list: vertical stack */}
         <div ref={listRef} className="industries-list">
           {industries.map((ind, idx) => (
             <div 
               key={ind.num} 
-              className="industry-item clickable"
+              data-index={idx}
+              className={`industry-item clickable ${hoveredIndex === idx ? 'js-hover' : ''}`}
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
               tabIndex={0}
@@ -110,6 +194,16 @@ export default function Industries() {
                   <span className="industry-num font-mono-accent">{ind.num}</span>
                   <h3 className="industry-name">{ind.name}</h3>
                 </div>
+              </div>
+
+              {/* Mobile inline image - displayed only on mobile/tablet viewport */}
+              <div className="industry-mobile-image-wrapper">
+                <img 
+                  src={ind.image} 
+                  alt={ind.name} 
+                  className="industry-mobile-image"
+                  loading="lazy"
+                />
               </div>
             </div>
           ))}
@@ -138,42 +232,6 @@ export default function Industries() {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                 />
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile: Auto-scrolling horizontal photo carousel */}
-        <div className="industries-mobile-carousel">
-          <div className="mobile-carousel-viewport">
-            <div 
-              className="mobile-carousel-strip"
-              style={{ transform: `translateX(-${mobileActiveIndex * 100}%)` }}
-            >
-              {industries.map((ind) => (
-                <div key={ind.num} className="mobile-carousel-slide">
-                  <img 
-                    src={ind.image} 
-                    alt={ind.name} 
-                    className="mobile-carousel-img"
-                    loading="lazy"
-                  />
-                  <div className="mobile-carousel-overlay">
-                    <span className="mobile-carousel-num">{ind.num}</span>
-                    <span className="mobile-carousel-label">{ind.name}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* Dot indicators */}
-          <div className="mobile-carousel-dots">
-            {industries.map((_, idx) => (
-              <button 
-                key={idx} 
-                className={`mobile-dot ${mobileActiveIndex === idx ? 'mobile-dot-active' : ''}`}
-                onClick={() => handleDotClick(idx)}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
             ))}
           </div>
         </div>
