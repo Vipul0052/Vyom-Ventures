@@ -120,7 +120,7 @@ export default function About() {
 
             {/* Feature stats pills container */}
             <div className="about-stats-grid" style={{ marginTop: '2rem' }}>
-              <StatItem end={2} prefix="₹" suffix=" Lakh+" label="Capital Secured" />
+              <StatItem end={1} prefix="Upto ₹" suffix=" Cr" label="Revenue Growth" />
               <StatItem end={10} suffix="+" label="Locations Launched" />
               <StatItem end={4.8} suffix="/5" decimals={1} label="Client Rating" />
               <StatItem end={35} suffix="%" label="Avg Revenue Boost" />

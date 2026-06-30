@@ -164,8 +164,8 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
             {/* Card 2: Revenue Targets */}
             <div className="floating-card floating-card-2">
               <div className="card-tag">Performance metrics</div>
-              <h3>Yearly Revenue Target</h3>
-              <div className="stat-value">₹2 Lakh/Yr</div>
+              <h3>Yearly Revenue Growth</h3>
+              <div className="stat-value">Upto ₹1 Cr</div>
               <div className="progress-label">
                 <span>78% achieved</span>
                 <span className="gold-text">+12% vs last month</span>

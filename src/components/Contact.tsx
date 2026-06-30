@@ -10,6 +10,8 @@ export default function Contact() {
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -51,15 +53,45 @@ export default function Contact() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, submit the form here
-    console.log('Submitted data:', formData);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', phone: '', businessType: '', services: [], message: '' });
-    }, 3000);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "61cd8dbd-ef11-43a0-b8bf-735285b32079",
+          name: formData.name,
+          phone: formData.phone,
+          businessType: formData.businessType,
+          services: formData.services.join(', '),
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsSubmitted(true);
+        setFormData({ name: '', phone: '', businessType: '', services: [], message: '' });
+        // Automatically hide the success message after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      } else {
+        setSubmitError(data.message || "Failed to submit inquiry. Please try again.");
+      }
+    } catch (error) {
+      setSubmitError("Something went wrong. Please check your network and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -82,7 +114,7 @@ export default function Contact() {
             <div className="contact-info-block font-mono-accent">
               <div className="info-item">
                 <span className="info-label">Direct Inquiry</span>
-                <a href="mailto:info@vyomnexus.in" className="info-value">info@vyomnexus.in</a>
+                <a href="mailto:info@vyomnexus.com" className="info-value">info@vyomnexus.com</a>
               </div>
               <div className="info-item">
                 <span className="info-label">Call Support</span>
@@ -121,6 +153,7 @@ export default function Contact() {
                     placeholder="Your Name"
                     className="form-input"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
                 <div className="form-group">
@@ -132,6 +165,7 @@ export default function Contact() {
                     placeholder="Contact Number"
                     className="form-input"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
                 <div className="form-group">
@@ -143,6 +177,7 @@ export default function Contact() {
                     placeholder="Business Type (e.g. Cloud Kitchen, Cafe)"
                     className="form-input"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
 
@@ -151,8 +186,9 @@ export default function Contact() {
                   <div className="custom-dropdown-container">
                     <button
                       type="button"
-                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      onClick={() => !isSubmitting && setIsDropdownOpen(!isDropdownOpen)}
                       className={`custom-dropdown-trigger ${isDropdownOpen ? 'active' : ''}`}
+                      disabled={isSubmitting}
                     >
                       <span className="trigger-text">
                         {formData.services.length === 0
@@ -162,7 +198,7 @@ export default function Contact() {
                       <span className={`trigger-arrow ${isDropdownOpen ? 'rotated' : ''}`}>▼</span>
                     </button>
 
-                    {isDropdownOpen && (
+                    {isDropdownOpen && !isSubmitting && (
                       <div className="custom-dropdown-menu">
                         {serviceOptions.map((option) => {
                           const isSelected = formData.services.includes(option);
@@ -173,6 +209,7 @@ export default function Contact() {
                                 checked={isSelected}
                                 onChange={() => handleServiceToggle(option)}
                                 className="dropdown-checkbox"
+                                disabled={isSubmitting}
                               />
                               <span className="checkbox-custom"></span>
                               <span className="dropdown-item-text">{option}</span>
@@ -193,13 +230,20 @@ export default function Contact() {
                     className="form-input form-textarea"
                     rows={4}
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
 
+                {submitError && (
+                  <div className="form-error-message" style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '-1rem', textAlign: 'left', fontFamily: 'var(--font-mono)' }}>
+                    Error: {submitError}
+                  </div>
+                )}
+
                 <div className="form-submit-container">
                   <Magnetic>
-                    <button type="submit" className="form-submit-btn">
-                      Submit Inquiry
+                    <button type="submit" className="form-submit-btn" disabled={isSubmitting}>
+                      {isSubmitting ? 'Sending...' : 'Submit Inquiry'}
                     </button>
                   </Magnetic>
                 </div>
