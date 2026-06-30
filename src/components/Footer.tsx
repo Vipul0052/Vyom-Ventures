@@ -37,9 +37,20 @@ export default function Footer() {
           </a>
         </div>
 
-        {/* Right Group: Copyright */}
+        {/* Right Group: Copyright & Agency Credit */}
         <div className="footer-copyright font-mono-accent">
-          © {new Date().getFullYear()} Vyom Nexus. All rights reserved.
+          <div>© {new Date().getFullYear()} Vyom Nexus. All rights reserved.</div>
+          <div className="footer-credits">
+            Developed & Managed by{' '}
+            <a 
+              href="https://polygonshift.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="agency-link"
+            >
+              Polygon Shift
+            </a>
+          </div>
         </div>
       </div>
     </footer>

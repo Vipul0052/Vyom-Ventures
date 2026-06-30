@@ -2507,6 +2507,29 @@ a.info-value:hover {
   color: var(--color-muted);
   letter-spacing: 0.05em;
   margin-right: 6rem; /* Prevent overlap with floating WhatsApp button */
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.footer-credits {
+  font-size: 0.65rem;
+  opacity: 0.8;
+}
+
+.footer-credits .agency-link {
+  color: var(--color-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.footer-credits .agency-link:hover {
+  opacity: 0.85;
+  color: var(--color-offwhite);
 }
 
 .footer-location {
@@ -2563,6 +2586,8 @@ a.info-value:hover {
   }
   .footer-copyright {
     margin-right: 0;
+    align-items: center;
+    text-align: center;
   }
 }
 
