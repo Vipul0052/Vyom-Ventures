@@ -87,7 +87,7 @@ export default function Contact() {
       } else {
         setSubmitError(data.message || "Failed to submit inquiry. Please try again.");
       }
-    } catch (error) {
+    } catch {
       setSubmitError("Something went wrong. Please check your network and try again.");
     } finally {
       setIsSubmitting(false);

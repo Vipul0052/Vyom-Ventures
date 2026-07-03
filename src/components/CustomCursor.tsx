@@ -85,7 +85,7 @@ export default function CustomCursor({ isLoading }: { isLoading?: boolean }) {
       window.removeEventListener('mouseout', onMouseOut);
       window.removeEventListener('scroll', onScroll);
     };
-  }, [isLoading, isVisible]);
+  }, [isLoading, isVisible, cursorX, cursorY]);
 
   if (isLoading || !isVisible) return null;
 

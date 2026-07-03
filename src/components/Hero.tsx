@@ -76,7 +76,7 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [onLoadingComplete]);
 
   const handleCtaClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();

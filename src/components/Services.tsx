@@ -12,7 +12,7 @@ import {
 
 interface ServiceItem {
   id: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string; size?: number; strokeWidth?: number }>;
   title: string;
   desc: string;
   bullets: string[];
