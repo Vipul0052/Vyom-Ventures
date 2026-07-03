@@ -1,9 +1,19 @@
 import { motion } from 'framer-motion';
 import Magnetic from './Magnetic';
 
-export default function NotFound() {
-  const handleGoHome = () => {
-    window.location.href = '/';
+interface NotFoundProps {
+  onGoHome?: () => void;
+}
+
+export default function NotFound({ onGoHome }: NotFoundProps) {
+  const handleGoHome = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.history.pushState({}, '', '/');
+    if (onGoHome) {
+      onGoHome();
+    } else {
+      window.location.href = '/';
+    }
   };
 
   return (
@@ -34,8 +44,9 @@ export default function NotFound() {
           <Magnetic>
             <button 
               onClick={handleGoHome} 
-              className="premium-btn btn-primary"
+              className="cta-primary-btn"
               aria-label="Return to Homepage"
+              style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: 'none', cursor: 'none' }}
             >
               <span>Return to Homepage</span>
               <svg 
@@ -58,3 +69,4 @@ export default function NotFound() {
     </div>
   );
 }
+

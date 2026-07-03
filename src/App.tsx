@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import CustomCursor from './components/CustomCursor';
 import ParticleBackground from './components/ParticleBackground';
 import Navbar from './components/Navbar';
@@ -14,11 +14,15 @@ import Footer from './components/Footer';
 import NotFound from './components/NotFound';
 
 function App() {
-  const [is404] = useState(() => {
+  const [is404, setIs404] = useState(() => {
     const path = window.location.pathname;
     return path !== '/' && path !== '';
   });
   const [isLoading, setIsLoading] = useState(() => !is404);
+
+  const handleLoadingComplete = useCallback(() => {
+    setIsLoading(false);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +60,7 @@ function App() {
       <>
         <CustomCursor isLoading={false} />
         <ParticleBackground />
-        <NotFound />
+        <NotFound onGoHome={() => setIs404(false)} />
       </>
     );
   }
@@ -76,7 +80,7 @@ function App() {
       <Navbar isLoading={isLoading} />
 
       {/* Cinematic Hero Entrance Section */}
-      <Hero onLoadingComplete={() => setIsLoading(false)} />
+      <Hero onLoadingComplete={handleLoadingComplete} />
 
       {/* Infinite scrolling industry vertical marquee ticker */}
       <MarqueeTicker />
