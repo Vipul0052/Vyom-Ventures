@@ -11,9 +11,14 @@ import Industries from './components/Industries';
 import WhyUs from './components/WhyUs';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import NotFound from './components/NotFound';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [is404] = useState(() => {
+    const path = window.location.pathname;
+    return path !== '/' && path !== '';
+  });
+  const [isLoading, setIsLoading] = useState(() => !is404);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,6 +50,16 @@ function App() {
   }, [isLoading]);
 
 
+
+  if (is404) {
+    return (
+      <>
+        <CustomCursor isLoading={false} />
+        <ParticleBackground />
+        <NotFound />
+      </>
+    );
+  }
 
   return (
     <>

@@ -31,7 +31,7 @@ export default function Services() {
         'Business Planning & Consultancy', 
         'Business Audit & Performance Improvement'
       ],
-      image: '/service-consultancy.png',
+      image: '/service-consultancy.webp',
       gridClass: 'grid-col-7',
     },
     {
@@ -45,7 +45,7 @@ export default function Services() {
         'Gaming Zone Setup & Development',
         'Cloud Kitchen Setup'
       ],
-      image: '/service-turnkey.png',
+      image: '/service-turnkey.webp',
       gridClass: 'grid-col-5',
     },
     {
@@ -56,7 +56,7 @@ export default function Services() {
       bullets: [
         'Kitchen Design & Layout Planning'
       ],
-      image: '/service-kitchen.png',
+      image: '/service-kitchen.webp',
       gridClass: 'grid-col-4',
     },
     {
@@ -69,7 +69,7 @@ export default function Services() {
         'Recipe Standardization',
         'Food Costing & Menu Pricing'
       ],
-      image: '/service-culinary.png',
+      image: '/service-culinary.webp',
       gridClass: 'grid-col-4',
     },
     {
@@ -81,7 +81,7 @@ export default function Services() {
         'SOP Development', 
         'Staff Recruitment & Training'
       ],
-      image: '/service-sop.png',
+      image: '/service-sop.webp',
       gridClass: 'grid-col-4',
     },
     {
@@ -93,7 +93,7 @@ export default function Services() {
         'Operations Management Support', 
         'Zomato & Swiggy Growth Support'
       ],
-      image: '/service-operations.png',
+      image: '/service-operations.webp',
       gridClass: 'grid-col-5',
     },
     {
@@ -105,7 +105,7 @@ export default function Services() {
         'Branding & Business Identity', 
         'Social Media & Digital Marketing'
       ],
-      image: '/service-branding.png',
+      image: '/service-branding.webp',
       gridClass: 'grid-col-7',
     },
     {
@@ -116,7 +116,7 @@ export default function Services() {
       bullets: [
         'Project Management & Execution'
       ],
-      image: '/service-pmc.png',
+      image: '/service-pmc.webp',
       gridClass: 'grid-col-12',
     },
   ];

@@ -12,6 +12,8 @@ export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
+  const [botcheck, setBotcheck] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -41,6 +43,9 @@ export default function Contact() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === 'phone') {
+      setPhoneError(null);
+    }
   };
 
   const handleServiceToggle = (service: string) => {
@@ -55,6 +60,22 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Honeypot check
+    if (botcheck) {
+      setIsSubmitted(true);
+      setFormData({ name: '', phone: '', businessType: '', services: [], message: '' });
+      return;
+    }
+
+    // Phone number regex validation (matches 10-15 digits, optionally prefixed with + or containing spaces/dashes)
+    const phoneRegex = /^\+?[0-9\s-]{10,15}$/;
+    if (!phoneRegex.test(formData.phone)) {
+      setPhoneError("Please enter a valid phone number (10 to 15 digits).");
+      return;
+    }
+    setPhoneError(null);
+
     setIsSubmitting(true);
     setSubmitError(null);
 
@@ -163,11 +184,24 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="Contact Number"
-                    className="form-input"
+                    className={`form-input ${phoneError ? 'input-error' : ''}`}
                     required
                     disabled={isSubmitting}
                   />
+                  {phoneError && (
+                    <span className="field-error-message font-mono-accent">{phoneError}</span>
+                  )}
                 </div>
+
+                {/* Honeypot field for bot protection */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  className="hidden"
+                  style={{ display: 'none' }}
+                  checked={botcheck}
+                  onChange={(e) => setBotcheck(e.target.checked)}
+                />
                 <div className="form-group">
                   <input
                     type="text"

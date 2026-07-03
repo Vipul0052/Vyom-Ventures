@@ -6,32 +6,32 @@ export default function Industries() {
     { 
       num: '01', 
       name: 'Restaurants',
-      image: '/prem restaurent.png'
+      image: '/prem restaurent.webp'
     },
     { 
       num: '02', 
       name: 'Cafes',
-      image: '/cafes and bakeries.png'
+      image: '/cafes and bakeries.webp'
     },
     { 
       num: '03', 
       name: 'Cloud Kitchens',
-      image: '/cloud kitchen.png'
+      image: '/cloud kitchen.webp'
     },
     { 
       num: '04', 
       name: 'Gaming Zones',
-      image: '/gaming zone.png'
+      image: '/gaming zone.webp'
     },
     { 
       num: '05', 
       name: 'Hospitality Businesses',
-      image: '/resort.png'
+      image: '/resort.webp'
     },
     { 
       num: '06', 
       name: 'Food Courts',
-      image: '/food court.png'
+      image: '/food court.webp'
     },
   ];
 
