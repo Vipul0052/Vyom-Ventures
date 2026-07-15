@@ -189,18 +189,13 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
               </div>
             </div>
 
-            {/* Card 4: Marketing Performance */}
+            {/* Card 4: Marketing & Branding */}
             <div className="floating-card floating-card-4">
-              <div className="card-tag">Marketing ROI</div>
-              <h3>Q3 Digital Campaigns</h3>
-              <div className="stat-value">4.2x ROAS</div>
-              <div className="progress-label">
-                <span>1.2k+ Leads Generated</span>
-                <span className="gold-text">+24% vs last month</span>
-              </div>
-              <div className="card-progress-bar">
-                <div className="progress-fill" style={{ width: '85%' }}></div>
-              </div>
+              <div className="card-tag">Marketing & Branding</div>
+              <h3>Digital Ads & Socials</h3>
+              <p className="card-desc" style={{ fontSize: '0.85rem', color: 'var(--color-muted)', marginTop: '0.25rem', lineHeight: '1.4' }}>
+                Instagram, Google ads & local marketing to drive footfall and brand awareness.
+              </p>
             </div>
           </div>
         </div>
