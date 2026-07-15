@@ -8,17 +8,18 @@ interface HeroProps {
 
 export default function Hero({ onLoadingComplete }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const loadingLineRef = useRef<HTMLDivElement>(null);
   const subtextRef = useRef<HTMLParagraphElement>(null);
   const ctasRef = useRef<HTMLDivElement>(null);
   const rightSideRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const overlay = document.getElementById('initial-loader');
+    const loadingLine = document.getElementById('initial-loader-line');
+
     const ctx = gsap.context(() => {
       // 1. Initial State Setup
-      gsap.set(overlayRef.current, { display: 'flex', opacity: 1 });
-      gsap.set(loadingLineRef.current, { scaleX: 0, transformOrigin: 'left' });
+      if (overlay) gsap.set(overlay, { display: 'flex', opacity: 1 });
+      if (loadingLine) gsap.set(loadingLine, { scaleX: 0, transformOrigin: 'left' });
       gsap.set('.hero-word-anim', { y: 60, opacity: 0 });
       gsap.set(subtextRef.current, { opacity: 0 });
       gsap.set(ctasRef.current, { y: 20, opacity: 0 });
@@ -28,24 +29,32 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
       const tl = gsap.timeline();
 
       // Step 1: Thin gold line draws left-to-right (0.4s)
-      tl.to(loadingLineRef.current, {
-        scaleX: 1,
-        duration: 0.6,
-        ease: 'power3.inOut',
-      });
+      if (loadingLine) {
+        tl.to(loadingLine, {
+          scaleX: 1,
+          duration: 0.6,
+          ease: 'power3.inOut',
+        });
+      }
 
       // Step 2: Loader mask fades out to reveal dark navy screen
-      tl.to(overlayRef.current, {
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-        onComplete: () => {
-          gsap.set(overlayRef.current, { display: 'none' });
-          if (onLoadingComplete) {
-            onLoadingComplete();
+      if (overlay) {
+        tl.to(overlay, {
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power2.out',
+          onComplete: () => {
+            gsap.set(overlay, { display: 'none' });
+            if (onLoadingComplete) {
+              onLoadingComplete();
+            }
           }
+        }, '+=0.1');
+      } else {
+        if (onLoadingComplete) {
+          onLoadingComplete();
         }
-      }, '+=0.1');
+      }
 
       // Step 4: Headline words stagger y:60 -> y:0, opacity 0->1, 80ms delay
       tl.to('.hero-word-anim', {
@@ -91,16 +100,6 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
 
   return (
     <section ref={containerRef} id="hero" className="hero-section">
-      {/* Intro cinematic loader overlay */}
-      <div ref={overlayRef} className="hero-loader-overlay">
-        <div className="hero-loader-content">
-          <img src="/Vyom Logo.svg" alt="Vyom Nexus" className="loader-logo-svg" />
-          <div className="loader-line-wrapper">
-            <div ref={loadingLineRef} className="hero-loader-line" />
-          </div>
-        </div>
-      </div>
-
       <div className="hero-grid">
         {/* Left aligned content column */}
         <div className="hero-content">
