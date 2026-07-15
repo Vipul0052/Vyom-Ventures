@@ -127,7 +127,7 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
 
           {/* Subtext */}
           <p ref={subtextRef} className="hero-subtext">
-            Building businesses through planning, execution & growth. Vyom Nexus is a consultancy and project management company focused on helping entrepreneurs turn their ideas into well-planned and professionally executed businesses.
+            Vyom Nexus is a business consultancy and project management company that helps entrepreneurs, restaurants, cafés, and hospitality businesses build, launch, and grow successful businesses. From business planning and restaurant setup to branding, marketing, and operations, we provide complete end-to-end solutions under one roof.
           </p>
 
           {/* CTAs */}
@@ -186,6 +186,20 @@ export default function Hero({ onLoadingComplete }: HeroProps) {
                   <h3>12 Active Builds</h3>
                   <p className="card-desc">Across NCR & Bengaluru</p>
                 </div>
+              </div>
+            </div>
+
+            {/* Card 4: Marketing Performance */}
+            <div className="floating-card floating-card-4">
+              <div className="card-tag">Marketing ROI</div>
+              <h3>Q3 Digital Campaigns</h3>
+              <div className="stat-value">4.2x ROAS</div>
+              <div className="progress-label">
+                <span>1.2k+ Leads Generated</span>
+                <span className="gold-text">+24% vs last month</span>
+              </div>
+              <div className="card-progress-bar">
+                <div className="progress-fill" style={{ width: '85%' }}></div>
               </div>
             </div>
           </div>

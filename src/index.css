@@ -416,6 +416,10 @@ h1, h2, h3, h4, h5, h6 {
   animation: float-anim 7s ease-in-out infinite;
   --rot: -1deg;
 }
+.floating-card-4 {
+  animation: float-anim 9s ease-in-out infinite;
+  --rot: 2deg;
+}
 
 @keyframes float-anim {
   0%, 100% {
@@ -1131,6 +1135,11 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 4;
 }
 
+.floating-card-4 {
+  align-self: flex-end;
+  z-index: 1;
+}
+
 @media (max-width: 480px) {
   .floating-card-1 {
     align-self: flex-start;
@@ -1140,6 +1149,9 @@ h1, h2, h3, h4, h5, h6 {
   }
   .floating-card-3 {
     align-self: flex-start;
+  }
+  .floating-card-4 {
+    align-self: flex-end;
   }
 }
 
